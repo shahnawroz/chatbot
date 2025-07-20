@@ -49,18 +49,20 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen bg-black text-white font-sans">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 bg-black border-b border-gray-800 shadow-md z-20 p-5 text-center">
-        <h1 className="text-3xl font-extrabold tracking-wide">MIANS AI Chatbot</h1>
-        <p className="text-sm text-gray-400 mt-1">Powered by MIANS</p>
+      <header className="fixed top-0 left-0 right-0 bg-black border-b border-gray-800 shadow-md z-20 p-4 sm:p-5 text-center">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-wide">
+          MIANS AI Chatbot
+        </h1>
+        <p className="text-xs sm:text-sm text-gray-400 mt-1">Powered by MIANS</p>
       </header>
 
       {/* Chat Window */}
       <main
-        className="flex flex-col flex-grow overflow-y-auto max-w-3xl mx-auto w-full px-6 py-6 pt-28 space-y-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900"
+        className="flex flex-col flex-grow max-w-3xl mx-auto w-full px-4 sm:px-6 pt-28 pb-24 space-y-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900 overflow-y-auto"
         style={{ scrollBehavior: "smooth" }}
       >
         {messages.length === 0 && !loading && (
-          <p className="text-center text-gray-500 italic select-none mt-20">
+          <p className="text-center text-gray-500 italic select-none mt-20 px-2">
             Say hi to start chatting with AI 🤖
           </p>
         )}
@@ -68,7 +70,7 @@ export default function Home() {
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={`max-w-[70%] px-5 py-3 rounded-2xl shadow-lg break-words
+            className={`max-w-full sm:max-w-[70%] px-4 sm:px-5 py-3 rounded-2xl shadow-lg break-words
               ${
                 msg.sender === "user"
                   ? "self-end bg-white text-black rounded-br-none ml-auto"
@@ -80,7 +82,7 @@ export default function Home() {
         ))}
 
         {loading && (
-          <div className="self-start max-w-[70%] px-5 py-3 rounded-2xl bg-gray-900 text-gray-400 animate-pulse border border-gray-700 mr-auto">
+          <div className="self-start max-w-full sm:max-w-[70%] px-4 sm:px-5 py-3 rounded-2xl bg-gray-900 text-gray-400 animate-pulse border border-gray-700 mr-auto">
             Thinking...
           </div>
         )}
@@ -89,7 +91,7 @@ export default function Home() {
       </main>
 
       {/* Input Box */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-black border-t border-gray-800 shadow-inner p-4 max-w-3xl mx-auto w-full flex gap-4 items-center px-6 z-20">
+      <footer className="fixed bottom-0 left-0 right-0 bg-black border-t border-gray-800 shadow-inner p-3 sm:p-4 max-w-3xl mx-auto w-full flex gap-3 sm:gap-4 items-center px-4 sm:px-6 z-20">
         <textarea
           rows={1}
           maxLength={1000}
@@ -97,12 +99,12 @@ export default function Home() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="flex-grow resize-none bg-gray-900 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900"
+          className="flex-grow resize-none bg-gray-900 text-white rounded-xl px-3 py-2 sm:px-4 sm:py-3 focus:outline-none focus:ring-2 focus:ring-white scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900 text-sm sm:text-base"
         />
         <button
           onClick={sendMessage}
           disabled={loading || !input.trim()}
-          className="bg-white text-black px-6 py-3 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition"
+          className="bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition text-sm sm:text-base"
           aria-label="Send message"
         >
           Send
