@@ -16,14 +16,25 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Prompt with instruction to answer "Mians" to "Who are you?"
+    const basePrompt = `
+If the user asks "Who are you?", respond with "Mians".
+Otherwise, answer naturally.
+
+User: ${message}
+Bot:
+`;
+
     const response = await cohere.generate({
-      model: "command", // ✅ supported by generate()
-      prompt: message,
+      model: "command", // Supported by generate()
+      prompt: basePrompt,
       maxTokens: 300,
       temperature: 0.7,
     });
 
-    const reply = response.generations[0].text;
+    // Replace all "Cohere" with "Mians"
+    const reply = response.generations[0].text.replace(/Cohere/gi, "Mians").trim();
+
     res.status(200).json({ reply });
   } catch (error) {
     console.error("Cohere API Error:", error);
